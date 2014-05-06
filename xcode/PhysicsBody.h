@@ -50,6 +50,9 @@ namespace Physics {
         /// Set this body to be affected by the world's gravity
         void            setAffectedByGravity(bool isAffected);
         
+        bool            usesPreciseCollision();
+        void            setPreciseCollision(bool isPrecise);
+        
         /// Is this body fixed in place or moving?
         bool            isDynamic() const;
         /// Set this body as fixed or affected by physics

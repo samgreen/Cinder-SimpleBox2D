@@ -222,6 +222,22 @@ namespace Physics {
         return mBodyDef.angularDamping;
     }
     
+    bool Body::usesPreciseCollision() {
+        if (mBody) {
+            return mBody->IsBullet();
+        }
+        
+        return mBodyDef.bullet;
+    }
+    
+    void Body::setPreciseCollision(bool isPrecise) {
+        if (mBody) {
+            return mBody->SetBullet(isPrecise);
+        }
+        
+        return mBody->SetBullet(isPrecise);
+    }
+    
     void Body::setCollisionCategory(uint16 category) {
         mFixtureDef.filter.categoryBits = category;
     }
