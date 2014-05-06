@@ -1,13 +1,14 @@
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
 
-#include <Box2D/Box2D.h>
+#include "Physics.h"
 
 using namespace ci;
 using namespace ci::app;
+using namespace Physics;
 using namespace std;
 
-const float BOX_SIZE = 10;
+const float BOX_SIZE = 25;
 
 class CinderBoxFunApp : public AppNative {
   public:
@@ -17,80 +18,76 @@ class CinderBoxFunApp : public AppNative {
 	void draw();
 	
 	void addBox( const Vec2f &pos );
-	
-	b2World				*mWorld;
-	vector<b2Body*>		mBoxes;
+	void addCircle( const Vec2f &pos );
+    
+    World          *mPhysicsWorld;
+    vector<Body*>  mBodies;
 };
 
 void CinderBoxFunApp::setup()
 {
-	b2Vec2 gravity( 0.0f, 10.0f );
-	mWorld = new b2World( gravity );
-
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set( 0.0f, getWindowHeight() );
-	b2Body* groundBody = mWorld->CreateBody(&groundBodyDef);
-
-	// Define the ground box shape.
-	b2PolygonShape groundBox;
-
-	// The extents are the half-widths of the box.
-	groundBox.SetAsBox( getWindowWidth(), 10.0f );
-
-	// Add the ground fixture to the ground body.
-	groundBody->CreateFixture(&groundBox, 0.0f);
-	
+    mPhysicsWorld = new World( Vec2f(0, 9.8f) );
+    mPhysicsWorld->addSolidGround(this);
+//    mPhysicsWorld->enableDebugDraw();
 }
 
 void CinderBoxFunApp::addBox( const Vec2f &pos )
 {
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set( pos.x, pos.y );
+    Box *box = new Box(pos, BOX_SIZE);
+    mPhysicsWorld->addBody(box);
+    mBodies.push_back(box);
+}
 
-	b2Body *body = mWorld->CreateBody( &bodyDef );
-
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox( BOX_SIZE, BOX_SIZE );
-
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-	fixtureDef.restitution = 0.5f; // bounce
-
-	body->CreateFixture( &fixtureDef );
-	mBoxes.push_back( body );
+void CinderBoxFunApp::addCircle( const Vec2f &pos ) {
+    Circle *circle = new Circle(pos, BOX_SIZE);
+    float32 randRestitution = (float32)arc4random_uniform(10) / 10;
+    circle->setRestitution(randRestitution);
+    mPhysicsWorld->addBody(circle);
+    mBodies.push_back(circle);
 }
 
 void CinderBoxFunApp::mouseDown( MouseEvent event )
 {
-	addBox( event.getPos() );
+    Vec2i pos = event.getPos();
+    if ( event.isShiftDown() ) {
+        addCircle( pos );
+    } else {
+        addBox( pos );
+    }
 }
 
 void CinderBoxFunApp::update()
 {
-	for( int i = 0; i < 10; ++i )
-		mWorld->Step( 1 / 30.0f, 10, 10 );
+    mPhysicsWorld->update();
 }
 
 void CinderBoxFunApp::draw()
 {
-	// clear out the window with black
+    // clear out the window with black
 	gl::clear( Color( 0, 0, 0 ) );
-	
-	gl::color( Color( 1, 0.5f, 0.25f ) );
-	for( vector<b2Body*>::const_iterator boxIt = mBoxes.begin(); boxIt != mBoxes.end(); ++boxIt ) {
-		Vec2f pos( (*boxIt)->GetPosition().x, (*boxIt)->GetPosition().y );
-		float t = toDegrees( (*boxIt)->GetAngle() );
-
+    
+//    mPhysicsWorld->draw();
+    
+	for( vector<Body*>::const_iterator boxIt = mBodies.begin(); boxIt != mBodies.end(); ++boxIt ) {
+        Body *body = *boxIt;
+        Vec2f pos = body->getPosition();
+        float t = toDegrees(body->getRotation());
+        
 		glPushMatrix();
 		gl::translate( pos );
 		gl::rotate( t );
 
-		Rectf rect( -BOX_SIZE, -BOX_SIZE, BOX_SIZE, BOX_SIZE );
-		gl::drawSolidRect( rect );
-
+        if (body->getBodyType() == BodyTypeBox) {
+            Box *boxBody = (Box *)body;
+            Rectf rect( -boxBody->getWidth(), -boxBody->getHeight(), boxBody->getWidth(), boxBody->getHeight() );
+            gl::color( Color( 1, 0.5f, 0.25f ) );
+            gl::drawSolidRect( rect );
+        } else {
+            Circle *circleBody = (Circle *)body;
+            gl::color( Color( 0.25, 0.5f, 1.f ) );
+            gl::drawSolidCircle(Vec2f(0,0), circleBody->getRadius());
+        }
+        
 		glPopMatrix();	
 	}
 }
