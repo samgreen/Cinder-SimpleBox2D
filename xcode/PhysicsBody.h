@@ -11,6 +11,7 @@
 #include <Box2D/Box2D.h>
 #include "cinder/Cinder.h"
 #include "cinder/Vector.h"
+#include "PhysicsMacros.h"
 
 namespace Physics {
     class World;
@@ -67,7 +68,11 @@ namespace Physics {
         void            setAngularDamping(float damping);
         
         ci::Vec2f       getVelocity();
-        void            setVelocity( const ci::Vec2f &velocity );
+        void            setVelocity(ConstVec &velocity);
+        
+        float           getAngularVelocity();
+        void            setAngularVelocity(float angularVelocity);
+        
         
     protected:
         BodyType        mBodyType;
