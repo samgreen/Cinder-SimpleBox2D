@@ -35,16 +35,13 @@ void CinderBoxFunApp::setup()
 
 void CinderBoxFunApp::addBox( const Vec2f &pos )
 {
-    // Add a box at (100,200) position that is 10x20
-    Box *box = new Box(Vec2f(100, 200), 10, 20);
+    Box *box = new Box(pos, 10, 20);
     mPhysicsWorld->addBody(box);
     mBodies.push_back(box);
 }
 
 void CinderBoxFunApp::addCircle( const Vec2f &pos ) {
     Circle *circle = new Circle(pos, BOX_SIZE);
-    float32 randRestitution = (float32)arc4random_uniform(10) / 10;
-    circle->setRestitution(randRestitution);
     mPhysicsWorld->addBody(circle);
     mBodies.push_back(circle);
 }
