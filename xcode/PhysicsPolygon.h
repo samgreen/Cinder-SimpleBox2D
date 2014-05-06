@@ -22,7 +22,9 @@ namespace Physics {
         Polygon(const ci::Vec2f &pos);
         ~Polygon();
         
-    private:
+        int         getWidth();
+        int         getHeight();
+        b2AABB      *getAABB();
     };
     
 }
