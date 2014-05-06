@@ -48,7 +48,7 @@ void CinderBoxFunApp::setup()
 
 void CinderBoxFunApp::addBox(ConstVec &pos)
 {
-    Box *box = new Box(pos, 10, 20);
+    Box *box = new Box(pos, 20, 10);
     this->addBody(box);
 }
 
@@ -61,9 +61,10 @@ void CinderBoxFunApp::addCircle(ConstVec &pos)
 void CinderBoxFunApp::addTriangle(ConstVec &pos)
 {
     PolyLine2f *points = new PolyLine2f();
-    points->push_back(Vec2f(-10, 0));
-    points->push_back(Vec2f( 10, 0));
-    points->push_back(Vec2f(  5, 10));
+    points->push_back(Vec2f(10, 0));
+    points->push_back(Vec2f(20, 20));
+    points->push_back(Vec2f(0, 20));
+
     
     Physics::Polygon *triangle = new Physics::Polygon(pos, *points);
     this->addBody(triangle);
@@ -78,8 +79,11 @@ void CinderBoxFunApp::addBody(Body *body)
 void CinderBoxFunApp::mouseDown(MouseEvent event)
 {
     ConstVec pos = event.getPos();
+    
     if (event.isShiftDown()) {
         addTriangle(pos);
+    } else if (event.isControlDown()) {
+        addCircle(pos);
     } else {
         addBox(pos);
     }
@@ -124,9 +128,9 @@ void CinderBoxFunApp::draw()
             Physics::Polygon *polyBody = (Physics::Polygon *)body;
             
             gl::color(0.5f, 1, 0.25);
-            ConstVec pt1 = Vec2f(-10, 0);
-            ConstVec pt2 = Vec2f( 10, 0);
-            ConstVec pt3 = Vec2f(  5, 10);
+            ConstVec pt1 = Vec2f(10,  0);
+            ConstVec pt2 = Vec2f(20, 20);
+            ConstVec pt3 = Vec2f( 0, 20);
             gl::drawSolidTriangle(pt1, pt2, pt3);
         }
         

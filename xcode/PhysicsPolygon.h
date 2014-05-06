@@ -20,12 +20,16 @@ namespace Physics {
     class Polygon : public Physics::Body {
     public:
         Polygon();
-        Polygon(ConstVec &pos, ci::PolyLine2f &points);
+        Polygon(ConstVec &pos, ci::PolyLine2f *points);
         ~Polygon();
         
-        int         getWidth();
-        int         getHeight();
-        b2AABB      *getAABB();
+        int                         getWidth();
+        int                         getHeight();
+        const ci::PolyLine2f&       getPolyLine();
+        b2AABB*                     getAABB();
+        
+    private:
+        ci::PolyLine2f *mPoints;
     };
     
 }

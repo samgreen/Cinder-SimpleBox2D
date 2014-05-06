@@ -13,14 +13,15 @@ using namespace ci;
 namespace Physics {
 #pragma mark - Constructors
     Polygon::Polygon() {}
-    Polygon::Polygon(ConstVec &pos, PolyLine2f &points) : Body(pos) {
+    Polygon::Polygon(ConstVec &pos, PolyLine2f *points) : Body(pos) {
+        mPoints = points;
         mBodyType = BodyTypePolygon;
         
         // This defines a triangle in CCW order.
-        int32 count = points.size();
+        int32 count = points->size();
         b2Vec2 *vertices = new b2Vec2[count];
         size_t index = 0;
-        for (PolyLine2f::iterator it = points.begin(); it != points.end(); it++) {
+        for (PolyLine2f::iterator it = points->begin(); it != points->end(); it++) {
             vertices[index] = toBoxVec(*it);
             index++;
         }
@@ -34,6 +35,10 @@ namespace Physics {
     Polygon::~Polygon() {};
     
 #pragma mark - Accessors
+    const ci::PolyLine2f& Polygon::getPolyLine() {
+        return *mPoints;
+    }
+    
     int Polygon::getWidth() {
         return 0;
     }
