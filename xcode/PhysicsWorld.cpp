@@ -25,15 +25,15 @@ namespace Physics {
     }
     
     void World::update() {
-        static const float32 TIME_STEP = 1.f / 60.f;
-        static const int32 VEL_ITERATIONS = 6;
-        static const int32 POS_ITERATIONS = 2;
+        static const float32 TIME_STEP = 1.f / 30.f;
+        static const int32 VEL_ITERATIONS = 10;
+        static const int32 POS_ITERATIONS = 10;
         
         this->update(TIME_STEP, VEL_ITERATIONS, POS_ITERATIONS);
     }
     
     void World::update(float32 timestep, int32 velocityIterations, int32 positionIterations) {
-        for (int32 i = 0; i < 60; ++i) {
+        for (int32 i = 0; i < 10; ++i) {
             mWorld->Step(timestep, velocityIterations, positionIterations);
         }
     }
