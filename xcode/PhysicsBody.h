@@ -18,7 +18,8 @@ namespace Physics {
     typedef enum _BodyType {
         BodyTypeUnknown,
         BodyTypeBox,
-        BodyTypeCircle
+        BodyTypeCircle,
+        BodyTypePolygon,
     } BodyType;
     
     class Body {
