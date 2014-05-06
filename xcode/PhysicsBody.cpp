@@ -188,5 +188,13 @@ namespace Physics {
         
         return mBodyDef.angularDamping;
     }
+    
+    void Body::setCollisionCategory(uint16 category) {
+        mFixtureDef.filter.categoryBits = category;
+    }
+    
+    void Body::setCollisionMask(uint16 mask) {
+        mFixtureDef.filter.maskBits = mask;
+    }
 }
 
