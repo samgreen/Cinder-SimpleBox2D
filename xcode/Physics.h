@@ -16,5 +16,6 @@
 #include "PhysicsBody.h"
 #include "PhysicsBox.h"
 #include "PhysicsCircle.h"
+#include "PhysicsPolygon.h"
 
 #endif

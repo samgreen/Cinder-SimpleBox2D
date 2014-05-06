@@ -13,18 +13,19 @@ const float BOX_SIZE = 25;
 class CinderBoxFunApp : public AppNative {
   public:
     void prepareSettings(Settings *settings);
-	void setup();
-	void update();
-	void draw();
+	void            setup();
+	void            update();
+	void            draw();
     
-    void mouseDown(MouseEvent event);
+    void            mouseDown(MouseEvent event);
 	
-	void addBox(ConstVec &pos);
-	void addCircle(ConstVec &pos);
-    void addTriangle(ConstVec &pos);
+    void            addBody(Body *body);
+	void            addBox(ConstVec &pos);
+	void            addCircle(ConstVec &pos);
+    void            addTriangle(ConstVec &pos);
     
-    World          *mPhysicsWorld;
-    vector<Body*>  mBodies;
+    World           *mPhysicsWorld;
+    vector<Body*>   mBodies;
 };
 
 void CinderBoxFunApp::prepareSettings( Settings* settings )
@@ -32,7 +33,7 @@ void CinderBoxFunApp::prepareSettings( Settings* settings )
 	settings->setFrameRate( 60.0f );
 	settings->setFullScreen( false );
 	settings->setResizable( false );
-	settings->setWindowSize( 1280, 650 );
+	settings->setWindowSize( 1280, 700 );
 }
 
 void CinderBoxFunApp::setup()
@@ -45,26 +46,42 @@ void CinderBoxFunApp::setup()
     mPhysicsWorld->enableDebugDraw();
 }
 
-void CinderBoxFunApp::addBox( ConstVec &pos )
+void CinderBoxFunApp::addBox(ConstVec &pos)
 {
     Box *box = new Box(pos, 10, 20);
-    mPhysicsWorld->addBody(box);
-    mBodies.push_back(box);
+    this->addBody(box);
 }
 
-void CinderBoxFunApp::addCircle( ConstVec &pos ) {
+void CinderBoxFunApp::addCircle(ConstVec &pos)
+{
     Circle *circle = new Circle(pos, BOX_SIZE);
-    mPhysicsWorld->addBody(circle);
-    mBodies.push_back(circle);
+    this->addBody(circle);
 }
 
-void CinderBoxFunApp::mouseDown( MouseEvent event )
+void CinderBoxFunApp::addTriangle(ConstVec &pos)
+{
+    PolyLine2f *points = new PolyLine2f();
+    points->push_back(Vec2f(-10, 0));
+    points->push_back(Vec2f( 10, 0));
+    points->push_back(Vec2f(  5, 10));
+    
+    Physics::Polygon *triangle = new Physics::Polygon(pos, *points);
+    this->addBody(triangle);
+}
+
+void CinderBoxFunApp::addBody(Body *body)
+{
+    mPhysicsWorld->addBody(body);
+    mBodies.push_back(body);
+}
+
+void CinderBoxFunApp::mouseDown(MouseEvent event)
 {
     ConstVec pos = event.getPos();
-    if ( event.isShiftDown() ) {
-        addCircle( pos );
+    if (event.isShiftDown()) {
+        addTriangle(pos);
     } else {
-        addBox( pos );
+        addBox(pos);
     }
 }
 
@@ -90,14 +107,27 @@ void CinderBoxFunApp::draw()
 		gl::rotate( t );
 
         if (body->getBodyType() == BodyTypeBox) {
+            
             Box *boxBody = (Box *)body;
+            
             Rectf rect( -boxBody->getWidth(), -boxBody->getHeight(), boxBody->getWidth(), boxBody->getHeight() );
             gl::color( Color( 1, 0.5f, 0.25f ) );
             gl::drawSolidRect( rect );
-        } else {
+        } else if (body->getBodyType() == BodyTypeCircle) {
+            
             Circle *circleBody = (Circle *)body;
+            
             gl::color( Color( 0.25, 0.5f, 1.f ) );
             gl::drawSolidCircle(Vec2f(0,0), circleBody->getRadius());
+        } else if (body->getBodyType() == BodyTypePolygon) {
+            
+            Physics::Polygon *polyBody = (Physics::Polygon *)body;
+            
+            gl::color(0.5f, 1, 0.25);
+            ConstVec pt1 = Vec2f(-10, 0);
+            ConstVec pt2 = Vec2f( 10, 0);
+            ConstVec pt3 = Vec2f(  5, 10);
+            gl::drawSolidTriangle(pt1, pt2, pt3);
         }
         
 		glPopMatrix();	

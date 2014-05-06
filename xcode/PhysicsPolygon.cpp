@@ -14,6 +14,8 @@ namespace Physics {
 #pragma mark - Constructors
     Polygon::Polygon() {}
     Polygon::Polygon(ConstVec &pos, PolyLine2f &points) : Body(pos) {
+        mBodyType = BodyTypePolygon;
+        
         // This defines a triangle in CCW order.
         int32 count = points.size();
         b2Vec2 *vertices = new b2Vec2[count];
