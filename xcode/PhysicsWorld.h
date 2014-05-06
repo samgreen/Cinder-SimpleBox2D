@@ -28,9 +28,11 @@ namespace Physics {
         ~World();
         
         void            update();
+        void            update(float32 timestep, int32 velocityIterations, int32 positionIterations);
         void            draw();
         
         void            addBody(Body *body);
+        void            removeBody(Body *body);
         void            addSolidGround(const ci::app::AppNative *app);
         
         ci::Vec2f       getGravity();
