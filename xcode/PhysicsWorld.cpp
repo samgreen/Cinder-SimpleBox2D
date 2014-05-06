@@ -21,7 +21,7 @@ namespace Physics {
     }
     
     World::World(const Vec2f &gravity) {
-        mWorld = new b2World(toBoxVector(gravity));
+        mWorld = new b2World(toBoxVec(gravity));
     }
     
     void World::update() {
@@ -73,11 +73,11 @@ namespace Physics {
     }
     
     Vec2f World::getGravity() {
-        return toVec2f(mWorld->GetGravity());
+        return toVec(mWorld->GetGravity());
     }
     
     void World::setGravity(const ci::Vec2f &gravity) {
-        mWorld->SetGravity(toBoxVector(gravity));
+        mWorld->SetGravity(toBoxVec(gravity));
     }
     
     void World::enableDebugDraw() {
