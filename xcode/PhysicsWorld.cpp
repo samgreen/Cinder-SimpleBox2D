@@ -57,6 +57,18 @@ namespace Physics {
         body->mBody = NULL;
     }
     
+    int World::getNumBodies() {
+        return mWorld->GetBodyCount();
+    }
+    
+    int World::getNumJoints() {
+        return mWorld->GetJointCount();
+    }
+    
+    int World::getNumContacts() {
+        return mWorld->GetContactCount();
+    }
+    
     void World::addSolidGround(const app::AppNative *app) {
         // TODO: Refactor this to use chains, or edges
         

@@ -34,6 +34,11 @@ namespace Physics {
         
         void            addBody(Body *body);
         void            removeBody(Body *body);
+        int             getNumBodies();
+        
+        int             getNumJoints();
+        int             getNumContacts();
+        
         void            addSolidGround(const ci::app::AppNative *app);
         
         ci::Vec2f       getGravity() const;
