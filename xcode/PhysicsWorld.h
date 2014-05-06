@@ -13,6 +13,7 @@
 #include "cinder/CinderMath.h"
 #include "cinder/Vector.h"
 #include "cinder/app/AppNative.h"
+#include "PhysicsMacros.h"
 
 namespace Physics {
     
@@ -23,7 +24,7 @@ namespace Physics {
     public:
         // Constructors
         World();
-        World(const ci::Vec2f &gravity);
+        World(ConstVec &gravity);
         // Destructors
         ~World();
         
@@ -36,7 +37,7 @@ namespace Physics {
         void            addSolidGround(const ci::app::AppNative *app);
         
         ci::Vec2f       getGravity() const;
-        void            setGravity(const ci::Vec2f &gravity);
+        void            setGravity(ConstVec &gravity);
         
         void            enableDebugDraw();
         void            disableDebugDraw();

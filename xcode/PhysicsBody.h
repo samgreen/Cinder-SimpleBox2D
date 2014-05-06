@@ -24,15 +24,14 @@ namespace Physics {
     
     class Body {
     public:
-        Body();
-        Body(const ci::Vec2f &pos);
-        Body(const ci::Vec2f &pos, bool isDynamic);
+        Body(ConstVec &pos);
+        Body(ConstVec &pos, bool isDynamic);
         ~Body();
 
         BodyType        getBodyType() const;
         
         ci::Vec2f       getPosition() const;
-        void            setPosition(const ci::Vec2f &pos);
+        void            setPosition(ConstVec &pos);
         
         float           getRotation() const;
         void            setRotation(float radians);
@@ -83,6 +82,8 @@ namespace Physics {
         
         void            setSensor(bool isSensor);
     protected:
+        Body() {};
+        
         BodyType        mBodyType;
         
         b2Body          *mBody;

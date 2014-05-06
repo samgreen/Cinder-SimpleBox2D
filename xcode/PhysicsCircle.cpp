@@ -12,11 +12,11 @@ using namespace ci;
 
 namespace Physics {
 #pragma mark - Default Constructor
-    Circle::Circle() : Circle(Vec2f(0,0), 10) {}
+//    Circle::Circle() : Circle(Vec2f(0,0), 10) {}
     
 #pragma mark Other Constructors
-    Circle::Circle(const Vec2f &pos) : Circle(pos, 10) {}
-    Circle::Circle(const Vec2f &pos, int radius) : Body(pos) {
+    Circle::Circle(ConstVec &pos) : Circle(pos, 10) {}
+    Circle::Circle(ConstVec &pos, int radius) : Body(pos) {
         mBodyType = BodyTypeCircle;
         
         // Create circle shape

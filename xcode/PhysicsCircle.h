@@ -18,12 +18,13 @@ namespace Physics {
     
     class Circle : public Physics::Body {
     public:
-        Circle();
-        Circle(const ci::Vec2f &pos);
-        Circle(const ci::Vec2f &pos, int radius);
+        Circle(ConstVec &pos);
+        Circle(ConstVec &pos, int radius);
         ~Circle();
         
         int getRadius() const;
+    protected:
+        Circle() {};
     };
     
 }

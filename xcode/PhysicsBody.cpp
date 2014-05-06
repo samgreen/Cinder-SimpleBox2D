@@ -12,12 +12,9 @@
 using namespace ci;
 
 namespace Physics {
-#pragma mark - Default Constructor
-    Body::Body() : Body(Vec2f(0,0), true) {};
-    
 #pragma mark Other Constructors
-    Body::Body(const Vec2f &pos) : Body(pos, true) {}
-    Body::Body(const Vec2f &pos, bool isDynamic) {
+    Body::Body(ConstVec &pos) : Body(pos, true) {}
+    Body::Body(ConstVec &pos, bool isDynamic) {
         // Body Def Defaults
         mBodyDef.position = toBoxVec(pos);
         mBodyDef.type = (isDynamic ? b2_dynamicBody : b2_staticBody);
@@ -47,7 +44,7 @@ namespace Physics {
         return toVec(mBodyDef.position);
     }
     
-    void Body::setPosition(const ci::Vec2f &pos) {
+    void Body::setPosition(ConstVec &pos) {
         if (mBody) {
             mBody->SetTransform(toBoxVec(pos), mBody->GetAngle());
         }
@@ -63,7 +60,7 @@ namespace Physics {
         return toVec(mBodyDef.linearVelocity);
     }
     
-    void Body::setVelocity(const ci::Vec2f &velocity) {
+    void Body::setVelocity(ConstVec &velocity) {
         if (mBody) {
             return mBody->SetLinearVelocity(toBoxVec(velocity));
         }

@@ -17,15 +17,17 @@ namespace Physics {
 
     class Box : public Physics::Body {
     public:
-        Box();
-        Box(const ci::Vec2f &pos);
-        Box(const ci::Vec2f &pos, int size);
-        Box(const ci::Vec2f &pos, const ci::Vec2f &size);
-        Box(const ci::Vec2f &pos, int width, int height);
+        Box(ConstVec &pos);
+        Box(ConstVec &pos, int size);
+        Box(ConstVec &pos, ConstVec &size);
+        Box(ConstVec &pos, int width, int height);
         ~Box();
         
         int getWidth() const;
         int getHeight() const;
+        
+    protected:
+        Box() {};
         
     private:
         int     mWidth;

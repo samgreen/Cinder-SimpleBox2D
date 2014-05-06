@@ -12,35 +12,47 @@ const float BOX_SIZE = 25;
 
 class CinderBoxFunApp : public AppNative {
   public:
+    void prepareSettings(Settings *settings);
 	void setup();
-	void mouseDown( MouseEvent event );	
 	void update();
 	void draw();
+    
+    void mouseDown(MouseEvent event);
 	
-	void addBox( const Vec2f &pos );
-	void addCircle( const Vec2f &pos );
+	void addBox(ConstVec &pos);
+	void addCircle(ConstVec &pos);
+    void addTriangle(ConstVec &pos);
     
     World          *mPhysicsWorld;
     vector<Body*>  mBodies;
 };
 
+void CinderBoxFunApp::prepareSettings( Settings* settings )
+{
+	settings->setFrameRate( 60.0f );
+	settings->setFullScreen( false );
+	settings->setResizable( false );
+	settings->setWindowSize( 1280, 650 );
+}
+
 void CinderBoxFunApp::setup()
 {
     // Create a physics world with Earth's gravity
-    mPhysicsWorld = new World( Vec2f(0, 9.8f) );
+    ConstVec gravity = Vec2f(0, 9.8f);
+    mPhysicsWorld = new World(gravity);
     // Add a solid ground at the bottom of the window
     mPhysicsWorld->addSolidGround(this);
     mPhysicsWorld->enableDebugDraw();
 }
 
-void CinderBoxFunApp::addBox( const Vec2f &pos )
+void CinderBoxFunApp::addBox( ConstVec &pos )
 {
     Box *box = new Box(pos, 10, 20);
     mPhysicsWorld->addBody(box);
     mBodies.push_back(box);
 }
 
-void CinderBoxFunApp::addCircle( const Vec2f &pos ) {
+void CinderBoxFunApp::addCircle( ConstVec &pos ) {
     Circle *circle = new Circle(pos, BOX_SIZE);
     mPhysicsWorld->addBody(circle);
     mBodies.push_back(circle);
@@ -48,7 +60,7 @@ void CinderBoxFunApp::addCircle( const Vec2f &pos ) {
 
 void CinderBoxFunApp::mouseDown( MouseEvent event )
 {
-    Vec2i pos = event.getPos();
+    ConstVec pos = event.getPos();
     if ( event.isShiftDown() ) {
         addCircle( pos );
     } else {

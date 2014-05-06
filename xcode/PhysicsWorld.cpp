@@ -7,7 +7,6 @@
 //
 
 #include "PhysicsWorld.h"
-#include "PhysicsMacros.h"
 #include "PhysicsBody.h"
 #include "PhysicsDebugDraw.h"
 
@@ -20,7 +19,7 @@ namespace Physics {
         mWorld = new b2World(b2Vec2());
     }
     
-    World::World(const Vec2f &gravity) {
+    World::World(ConstVec &gravity) {
         mWorld = new b2World(toBoxVec(gravity));
     }
     
@@ -79,7 +78,7 @@ namespace Physics {
         return toVec(mWorld->GetGravity());
     }
     
-    void World::setGravity(const ci::Vec2f &gravity) {
+    void World::setGravity(ConstVec &gravity) {
         mWorld->SetGravity(toBoxVec(gravity));
     }
     
