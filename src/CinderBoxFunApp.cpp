@@ -12,20 +12,25 @@ const float BOX_SIZE = 25;
 
 class CinderBoxFunApp : public AppNative {
   public:
-    void prepareSettings(Settings *settings);
+    void            prepareSettings(Settings *settings);
 	void            setup();
 	void            update();
 	void            draw();
+    void            drawHelpText();
+    void            drawGameboyText(std::string text, Vec2f pos, float size = 32.f) const;
     
-    void            mouseDown(MouseEvent event);
-	
+    void            mouseMove(MouseEvent event);
+	void            keyDown(KeyEvent event);
+    
     void            addBody(Body *body);
 	void            addBox(ConstVec &pos);
 	void            addCircle(ConstVec &pos);
     void            addTriangle(ConstVec &pos);
     void            buildTower();
-    
+  
+private:
     World           *mPhysicsWorld;
+    Vec2i           mLastMousePos;
     vector<Body*>   mBodies;
 };
 
@@ -42,11 +47,8 @@ void CinderBoxFunApp::setup()
     // Create a physics world with Earth's gravity
     ConstVec gravity = Vec2f(0, 9.8f);
     mPhysicsWorld = new World(gravity);
-    // Add a solid ground at the bottom of the window
-    mPhysicsWorld->addSolidGround(this);
-    mPhysicsWorld->enableDebugDraw();
-    
-    buildTower();
+    // Add walls around the border of the window
+    mPhysicsWorld->addSolidEdges(this);
 }
 
 void CinderBoxFunApp::addBox(ConstVec &pos)
@@ -100,18 +102,22 @@ void CinderBoxFunApp::buildTower()
     }
 }
 
-void CinderBoxFunApp::mouseDown(MouseEvent event)
+void CinderBoxFunApp::mouseMove(MouseEvent event)
 {
-    ConstVec pos = event.getPos();
-    
-    if (event.isShiftDown()) {
-        addTriangle(pos);
-    } else if (event.isControlDown()) {
-        addCircle(pos);
-    } else {
+    // Save the mouse position
+    mLastMousePos = event.getPos();
+}
+
+void CinderBoxFunApp::keyDown(KeyEvent event)
+{
+    // Cast the mouse position to a constant
+    ConstVec pos = mLastMousePos;
+    if (event.getCode() == KeyEvent::KEY_b) {
         addBox(pos);
-        ConstVec *gravity = new ConstVec(5, 2.5);
-        mPhysicsWorld->setGravity(*gravity);
+    } else if (event.getCode() == KeyEvent::KEY_c) {
+        addCircle(pos);
+    } else if (event.getCode() == KeyEvent::KEY_t) {
+        addTriangle(pos);
     }
 }
 
@@ -125,7 +131,7 @@ void CinderBoxFunApp::draw()
     // clear out the window with black
 	gl::clear( Color( 0, 0, 0 ) );
     
-//    mPhysicsWorld->draw();
+    drawHelpText();
     
 	for( vector<Body*>::const_iterator boxIt = mBodies.begin(); boxIt != mBodies.end(); ++boxIt ) {
         Body *body = *boxIt;
@@ -151,7 +157,7 @@ void CinderBoxFunApp::draw()
             gl::drawSolidCircle(Vec2f(0,0), circleBody->getRadius());
         } else if (body->getBodyType() == BodyTypePolygon) {
             
-            Physics::Polygon *polyBody = (Physics::Polygon *)body;
+//            Physics::Polygon *polyBody = (Physics::Polygon *)body;
             
             gl::color(0.5f, 1, 0.25);
             ConstVec pt1 = Vec2f(10,  0);
@@ -162,6 +168,22 @@ void CinderBoxFunApp::draw()
         
 		glPopMatrix();	
 	}
+}
+
+void CinderBoxFunApp::drawHelpText() {
+    // Draw Help
+    Vec2f textPosition = Vec2f(getWindowWidth() * 0.5f, 32.f);
+    drawGameboyText("B - Box", textPosition);
+    textPosition += Vec2f(0, 32.f);
+    drawGameboyText("C - Circle", textPosition);
+    textPosition += Vec2f(0, 32.f);
+    drawGameboyText("T - Triangle", textPosition);
+}
+
+void CinderBoxFunApp::drawGameboyText(std::string text, Vec2f pos, float size) const {
+    gl::enableAlphaBlending();
+    gl::drawStringCentered(text, pos, Color::white(), Font("Early-Gameboy", size));
+    gl::disableAlphaBlending();
 }
 
 CINDER_APP_NATIVE( CinderBoxFunApp, RendererGl )
