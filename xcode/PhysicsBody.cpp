@@ -108,6 +108,23 @@ namespace Physics {
         mBodyDef.fixedRotation = isLocked;
     }
     
+#pragma mark - Forces
+    void Body::applyForce(ConstVec &force, ConstVec &point) {
+        mBody->ApplyForce(toBoxVec(force), toBoxVec(point));
+    }
+    
+    void Body::applyTorque(float torque) {
+        mBody->ApplyTorque(torque);
+    }
+    
+    void Body::applyLinearImpulse(ConstVec &impulse, ConstVec &point) {
+        mBody->ApplyLinearImpulse(toBoxVec(impulse), toBoxVec(point));
+    }
+    
+    void Body::applyAngularImpulse(float impulse) {
+        mBody->ApplyAngularImpulse(impulse);
+    }
+    
 #pragma mark - Other Physics
     bool Body::isAffectedByGravity() const {
         if (mBody) {

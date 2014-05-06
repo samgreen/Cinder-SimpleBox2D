@@ -77,6 +77,11 @@ namespace Physics {
         float           getAngularVelocity() const;
         void            setAngularVelocity(float angularVelocity);
         
+        void            applyForce(ConstVec &force, ConstVec &point);
+        void            applyTorque(float torque);
+        void            applyLinearImpulse(ConstVec &impulse, ConstVec &point);
+        void            applyAngularImpulse(float impulse);
+        
         /// ((catA & maskB) != 0 && (catB & maskA) != 0)
         void            setCollisionCategory(uint16 category);
         void            setCollisionMask(uint16 mask);
