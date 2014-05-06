@@ -36,6 +36,7 @@
 		6FCF9C8776B641DDB394DDCB /* b2Math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 128413E739D54C798C1F9993 /* b2Math.cpp */; };
 		738A8298533144EE8F802D19 /* b2PolygonAndCircleContact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 797517B3F41841D3846179EA /* b2PolygonAndCircleContact.cpp */; };
 		76D20FE8D06B41C5B617B0DD /* b2PolygonShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1606EC31174EE186D94725 /* b2PolygonShape.cpp */; };
+		772C6901191903B6009251F0 /* PhysicsPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 772C68FF191903B6009251F0 /* PhysicsPolygon.cpp */; };
 		77796BF91918B776008F6451 /* PhysicsBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77796BF71918B776008F6451 /* PhysicsBox.cpp */; };
 		77796C481918BE45008F6451 /* PhysicsBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77796C461918BE45008F6451 /* PhysicsBody.cpp */; };
 		77796C4B1918C01C008F6451 /* PhysicsWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77796C491918C01C008F6451 /* PhysicsWorld.cpp */; };
@@ -129,6 +130,8 @@
 		72F6B89BBCC345089D4C0DB3 /* b2Timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = b2Timer.h; path = ../blocks/Box2D/src/Box2D/Common/b2Timer.h; sourceTree = "<group>"; };
 		74C6A4ECB6974402BC81253E /* b2Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = b2Timer.cpp; path = ../blocks/Box2D/src/Box2D/Common/b2Timer.cpp; sourceTree = "<group>"; };
 		74E8CD3E15E5481B8ACCC96D /* CinderBoxFun_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = CinderBoxFun_Prefix.pch; sourceTree = "<group>"; };
+		772C68FF191903B6009251F0 /* PhysicsPolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsPolygon.cpp; sourceTree = "<group>"; };
+		772C6900191903B6009251F0 /* PhysicsPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsPolygon.h; sourceTree = "<group>"; };
 		77796BF71918B776008F6451 /* PhysicsBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsBox.cpp; sourceTree = "<group>"; };
 		77796BF81918B776008F6451 /* PhysicsBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsBox.h; sourceTree = "<group>"; };
 		77796C461918BE45008F6451 /* PhysicsBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsBody.cpp; sourceTree = "<group>"; };
@@ -480,6 +483,8 @@
 				77796BF81918B776008F6451 /* PhysicsBox.h */,
 				77796C4F1918D6D8008F6451 /* PhysicsCircle.cpp */,
 				77796C501918D6D8008F6451 /* PhysicsCircle.h */,
+				772C68FF191903B6009251F0 /* PhysicsPolygon.cpp */,
+				772C6900191903B6009251F0 /* PhysicsPolygon.h */,
 			);
 			name = Shapes;
 			sourceTree = "<group>";
@@ -594,6 +599,7 @@
 				327D8359F6A547429E9F48FB /* b2Distance.cpp in Sources */,
 				F5FF520C137C49C7A9AEEB1F /* b2DynamicTree.cpp in Sources */,
 				F009C0EB55F547568553CA76 /* b2TimeOfImpact.cpp in Sources */,
+				772C6901191903B6009251F0 /* PhysicsPolygon.cpp in Sources */,
 				176E6BA77D354960BEAB9002 /* b2ChainShape.cpp in Sources */,
 				D2E6E8991A794F50AE89EC34 /* b2CircleShape.cpp in Sources */,
 				C4A3D7757065430FB2029772 /* b2EdgeShape.cpp in Sources */,
