@@ -66,7 +66,7 @@ void CinderBoxFunApp::addTriangle(ConstVec &pos)
     points->push_back(Vec2f(0, 20));
 
     
-    Physics::Polygon *triangle = new Physics::Polygon(pos, *points);
+    Physics::Polygon *triangle = new Physics::Polygon(pos, points);
     this->addBody(triangle);
 }
 

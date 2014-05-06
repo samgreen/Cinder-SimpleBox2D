@@ -38,10 +38,10 @@ namespace Physics {
 #pragma mark - Position
     Vec2f Body::getPosition() const {
         if (mBody) {
-            return toVec(mBody->GetPosition());
+            return fromBoxVec(mBody->GetPosition());
         }
         
-        return toVec(mBodyDef.position);
+        return fromBoxVec(mBodyDef.position);
     }
     
     void Body::setPosition(ConstVec &pos) {
@@ -55,9 +55,9 @@ namespace Physics {
 #pragma mark - Velocity
     Vec2f Body::getVelocity() const {
         if (mBody) {
-            return toVec(mBody->GetLinearVelocity());
+            return fromBoxVec(mBody->GetLinearVelocity());
         }
-        return toVec(mBodyDef.linearVelocity);
+        return fromBoxVec(mBodyDef.linearVelocity);
     }
     
     void Body::setVelocity(ConstVec &velocity) {

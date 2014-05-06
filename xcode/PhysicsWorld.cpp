@@ -75,7 +75,7 @@ namespace Physics {
     }
     
     Vec2f World::getGravity() const {
-        return toVec(mWorld->GetGravity());
+        return fromBoxVec(mWorld->GetGravity());
     }
     
     void World::setGravity(ConstVec &gravity) {

@@ -21,7 +21,7 @@ namespace Physics {
         return b2Vec2(v.x, v.y);
     }
     
-    static inline ci::Vec2f toVec(const b2Vec2 &v) {
+    static inline ci::Vec2f fromBoxVec(const b2Vec2 &v) {
         return ci::Vec2f(v.x, v.y);
     }
 }

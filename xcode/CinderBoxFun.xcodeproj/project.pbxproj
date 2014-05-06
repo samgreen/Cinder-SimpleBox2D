@@ -134,15 +134,15 @@
 		772C6900191903B6009251F0 /* PhysicsPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsPolygon.h; sourceTree = "<group>"; };
 		77796BF71918B776008F6451 /* PhysicsBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsBox.cpp; sourceTree = "<group>"; };
 		77796BF81918B776008F6451 /* PhysicsBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsBox.h; sourceTree = "<group>"; };
-		77796C461918BE45008F6451 /* PhysicsBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsBody.cpp; sourceTree = "<group>"; };
+		77796C461918BE45008F6451 /* PhysicsBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = PhysicsBody.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		77796C471918BE45008F6451 /* PhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsBody.h; sourceTree = "<group>"; };
 		77796C491918C01C008F6451 /* PhysicsWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsWorld.cpp; sourceTree = "<group>"; };
 		77796C4A1918C01C008F6451 /* PhysicsWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsWorld.h; sourceTree = "<group>"; };
 		77796C4C1918C3DD008F6451 /* Physics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
-		77796C4E1918D5BB008F6451 /* PhysicsMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsMacros.h; sourceTree = "<group>"; };
+		77796C4E1918D5BB008F6451 /* PhysicsMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PhysicsMacros.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		77796C4F1918D6D8008F6451 /* PhysicsCircle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsCircle.cpp; sourceTree = "<group>"; };
 		77796C501918D6D8008F6451 /* PhysicsCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsCircle.h; sourceTree = "<group>"; };
-		77796C561918ED96008F6451 /* PhysicsDebugDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsDebugDraw.cpp; sourceTree = "<group>"; };
+		77796C561918ED96008F6451 /* PhysicsDebugDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = PhysicsDebugDraw.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		77796C571918ED96008F6451 /* PhysicsDebugDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsDebugDraw.h; sourceTree = "<group>"; };
 		797517B3F41841D3846179EA /* b2PolygonAndCircleContact.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = b2PolygonAndCircleContact.cpp; path = ../blocks/Box2D/src/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp; sourceTree = "<group>"; };
 		7C7DF1EA997C4CA78F5B9359 /* b2ChainAndPolygonContact.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = b2ChainAndPolygonContact.cpp; path = ../blocks/Box2D/src/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp; sourceTree = "<group>"; };
@@ -440,7 +440,6 @@
 			isa = PBXGroup;
 			children = (
 				77796C4C1918C3DD008F6451 /* Physics.h */,
-				77796C4E1918D5BB008F6451 /* PhysicsMacros.h */,
 				77796C541918D7F2008F6451 /* Common */,
 				77796C531918D7ED008F6451 /* Collision */,
 				77796C521918D79C008F6451 /* Dynamics */,
@@ -470,6 +469,7 @@
 		77796C541918D7F2008F6451 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				77796C4E1918D5BB008F6451 /* PhysicsMacros.h */,
 				77796C561918ED96008F6451 /* PhysicsDebugDraw.cpp */,
 				77796C571918ED96008F6451 /* PhysicsDebugDraw.h */,
 			);
