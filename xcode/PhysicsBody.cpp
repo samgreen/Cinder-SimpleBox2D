@@ -145,6 +145,22 @@ namespace Physics {
         mBodyDef.type = type;
     }
     
+    bool Body::isActive() {
+        if (mBody) {
+            return mBody->IsActive();
+        }
+        
+        return mBodyDef.active;
+    }
+    
+    void Body::setActive(bool isActive) {
+        if (mBody) {
+            return mBody->SetActive(isActive);
+        }
+        
+        mBodyDef.active = isActive;
+    }
+    
     void Body::setDensity(float density) {
         mFixtureDef.density = density;
     }

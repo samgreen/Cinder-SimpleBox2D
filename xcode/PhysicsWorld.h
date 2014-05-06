@@ -40,6 +40,9 @@ namespace Physics {
         
         void            enableDebugDraw();
         void            disableDebugDraw();
+        
+        // TODO: Add raycast
+        // TODO: Add point check
     protected:
         b2World         *mWorld;
     };

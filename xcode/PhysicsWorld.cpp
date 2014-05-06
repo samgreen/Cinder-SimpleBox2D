@@ -58,6 +58,8 @@ namespace Physics {
     }
     
     void World::addSolidGround(const app::AppNative *app) {
+        // TODO: Refactor this to use chains, or edges
+        
         b2BodyDef groundBodyDef;
         groundBodyDef.position.Set( 0.0f, app->getWindowHeight() );
         b2Body* groundBody = mWorld->CreateBody(&groundBodyDef);

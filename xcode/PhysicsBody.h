@@ -55,6 +55,9 @@ namespace Physics {
         /// Set this body as fixed or affected by physics
         void            setDynamic(bool isDynamic);
         
+        bool            isActive();
+        void            setActive(bool isActive);
+        
         float           getDensity();
         void            setDensity(float density);
         
@@ -64,6 +67,7 @@ namespace Physics {
         float           getFriction();
         void            setFriction(float friction);
         
+        /// Damping is used to reduce the world velocity of bodies. Damping is different than friction because friction only occurs with contact. Damping is not a replacement for friction and the two effects should be used together.
         float           getAngularDamping();
         void            setAngularDamping(float damping);
         
