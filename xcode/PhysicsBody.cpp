@@ -13,8 +13,8 @@ using namespace ci;
 
 namespace Physics {
 #pragma mark Other Constructors
-    Body::Body(ConstVec &pos) : Body(pos, true) {}
-    Body::Body(ConstVec &pos, bool isDynamic) {
+    Body::Body(ConstVec pos) : Body(pos, true) {}
+    Body::Body(ConstVec pos, bool isDynamic) {
         // Body Def Defaults
         mBodyDef.position = toBoxVec(pos);
         mBodyDef.type = (isDynamic ? b2_dynamicBody : b2_staticBody);
@@ -44,7 +44,7 @@ namespace Physics {
         return fromBoxVec(mBodyDef.position);
     }
     
-    void Body::setPosition(ConstVec &pos) {
+    void Body::setPosition(ConstVec pos) {
         if (mBody) {
             mBody->SetTransform(toBoxVec(pos), mBody->GetAngle());
         }
@@ -60,7 +60,7 @@ namespace Physics {
         return fromBoxVec(mBodyDef.linearVelocity);
     }
     
-    void Body::setVelocity(ConstVec &velocity) {
+    void Body::setVelocity(ConstVec velocity) {
         if (mBody) {
             return mBody->SetLinearVelocity(toBoxVec(velocity));
         }
@@ -109,7 +109,7 @@ namespace Physics {
     }
     
 #pragma mark - Forces
-    void Body::applyForce(ConstVec &force, ConstVec &point) {
+    void Body::applyForce(ConstVec force, ConstVec point) {
         mBody->ApplyForce(toBoxVec(force), toBoxVec(point));
     }
     
@@ -117,7 +117,7 @@ namespace Physics {
         mBody->ApplyTorque(torque);
     }
     
-    void Body::applyLinearImpulse(ConstVec &impulse, ConstVec &point) {
+    void Body::applyLinearImpulse(ConstVec impulse, ConstVec point) {
         mBody->ApplyLinearImpulse(toBoxVec(impulse), toBoxVec(point));
     }
     

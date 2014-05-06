@@ -17,10 +17,10 @@ namespace Physics {
 
     class Box : public Physics::Body {
     public:
-        Box(ConstVec &pos);
-        Box(ConstVec &pos, int size);
-        Box(ConstVec &pos, ConstVec &size);
-        Box(ConstVec &pos, int width, int height);
+        Box(ConstVec pos);
+        Box(ConstVec pos, int size);
+        Box(ConstVec pos, ConstVec size);
+        Box(ConstVec pos, int width, int height);
         ~Box();
         
         int getWidth() const;

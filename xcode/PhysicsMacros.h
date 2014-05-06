@@ -14,7 +14,7 @@
 
 namespace Physics {
     
-    typedef ci::Vec2f ConstVec2f;
+    typedef const ci::Vec2f ConstVec2f;
     typedef ConstVec2f ConstVec;
     
     static inline b2Vec2 toBoxVec(ConstVec &v) {

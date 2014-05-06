@@ -20,7 +20,7 @@ namespace Physics {
     class Polygon : public Physics::Body {
     public:
         Polygon();
-        Polygon(ConstVec &pos, ci::PolyLine2f *points);
+        Polygon(ConstVec pos, ci::PolyLine2f *points);
         ~Polygon();
         
         int                         getWidth();

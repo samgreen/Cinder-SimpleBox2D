@@ -13,7 +13,7 @@ using namespace ci;
 namespace Physics {
 #pragma mark - Constructors
     Polygon::Polygon() {}
-    Polygon::Polygon(ConstVec &pos, PolyLine2f *points) : Body(pos) {
+    Polygon::Polygon(ConstVec pos, PolyLine2f *points) : Body(pos) {
         mPoints = points;
         mBodyType = BodyTypePolygon;
         

@@ -25,15 +25,15 @@ namespace Physics {
     
     class Body {
     public:
-        Body(ConstVec &pos);
-        Body(ConstVec &pos, bool isDynamic);
+        Body(ConstVec pos);
+        Body(ConstVec pos, bool isDynamic);
         ~Body();
 
         BodyType        getBodyType() const;
         
 #pragma mark - Position
         ci::Vec2f       getPosition() const;
-        void            setPosition(ConstVec &pos);
+        void            setPosition(ConstVec pos);
         
 #pragma mark - Rotation
         float           getRotation() const;
@@ -61,9 +61,9 @@ namespace Physics {
         void            setAngularDamping(float damping);
         
 #pragma mark - Forces
-        void            applyForce(ConstVec &force, ConstVec &point);
+        void            applyForce(ConstVec force, ConstVec point);
         void            applyTorque(float torque);
-        void            applyLinearImpulse(ConstVec &impulse, ConstVec &point);
+        void            applyLinearImpulse(ConstVec impulse, ConstVec point);
         void            applyAngularImpulse(float impulse);
         
 #pragma mark - Collision
@@ -88,7 +88,7 @@ namespace Physics {
         void            setMass(float mass);
         
         ci::Vec2f       getVelocity() const;
-        void            setVelocity(ConstVec &velocity);
+        void            setVelocity(ConstVec velocity);
         
 #pragma mark - Other Helpers
         /// Is this body fixed in place or moving?

@@ -24,7 +24,7 @@ namespace Physics {
     public:
         // Constructors
         World();
-        World(ConstVec &gravity);
+        World(ConstVec gravity);
         // Destructors
         ~World();
         
@@ -44,7 +44,7 @@ namespace Physics {
         void            addSolidEdge(int x, int y, int width, int height);
         
         ci::Vec2f       getGravity() const;
-        void            setGravity(ConstVec &gravity);
+        void            setGravity(ConstVec gravity);
         
         void            enableDebugDraw();
         void            disableDebugDraw();

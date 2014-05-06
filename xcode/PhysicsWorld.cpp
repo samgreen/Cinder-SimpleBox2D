@@ -19,7 +19,7 @@ namespace Physics {
         mWorld = new b2World(b2Vec2());
     }
     
-    World::World(ConstVec &gravity) {
+    World::World(ConstVec gravity) {
         mWorld = new b2World(toBoxVec(gravity));
     }
     
@@ -105,7 +105,7 @@ namespace Physics {
         return fromBoxVec(mWorld->GetGravity());
     }
     
-    void World::setGravity(ConstVec &gravity) {
+    void World::setGravity(ConstVec gravity) {
         mWorld->SetGravity(toBoxVec(gravity));
     }
     

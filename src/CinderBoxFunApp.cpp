@@ -8,7 +8,10 @@ using namespace ci::app;
 using namespace Physics;
 using namespace std;
 
-const float BOX_SIZE = 25;
+static const float BOX_WIDTH                = 40;
+static const float BOX_HEIGHT               = 20;
+static const float CIRCLE_RADIUS            = 25;
+static const float TRIANGLE_EDGE_LENGTH     = 40;
 
 class CinderBoxFunApp : public AppNative {
   public:
@@ -45,30 +48,27 @@ void CinderBoxFunApp::prepareSettings( Settings* settings )
 void CinderBoxFunApp::setup()
 {
     // Create a physics world with Earth's gravity
-    ConstVec gravity = Vec2f(0, 9.8f);
-    mPhysicsWorld = new World(gravity);
+    mPhysicsWorld = new World(Vec2f(0, 9.8f));
     // Add walls around the border of the window
     mPhysicsWorld->addSolidEdges(this);
 }
 
 void CinderBoxFunApp::addBox(ConstVec &pos)
 {
-    Box *box = new Box(pos, 20, 10);
-    addBody(box);
+    addBody(new Box(pos, BOX_WIDTH, BOX_HEIGHT));
 }
 
 void CinderBoxFunApp::addCircle(ConstVec &pos)
 {
-    Circle *circle = new Circle(pos, BOX_SIZE);
-    addBody(circle);
+    addBody(new Circle(pos, CIRCLE_RADIUS));
 }
 
 void CinderBoxFunApp::addTriangle(ConstVec &pos)
 {
     PolyLine2f *points = new PolyLine2f();
-    points->push_back(Vec2f(10, 0));
-    points->push_back(Vec2f(20, 20));
-    points->push_back(Vec2f(0, 20));
+    points->push_back(Vec2f(TRIANGLE_EDGE_LENGTH * 0.5f, 0));
+    points->push_back(Vec2f(TRIANGLE_EDGE_LENGTH, TRIANGLE_EDGE_LENGTH));
+    points->push_back(Vec2f( 0, TRIANGLE_EDGE_LENGTH));
 
     
     Physics::Polygon *triangle = new Physics::Polygon(pos, points);
@@ -83,22 +83,27 @@ void CinderBoxFunApp::addBody(Body *body)
 
 void CinderBoxFunApp::buildTower()
 {
-    int CENTER_X = getWindowWidth() * 0.5f;
-    int MAX_Y = getWindowHeight();
-    int BOX_WIDTH = 100;
-    int BOX_HEIGHT = 10;
+    int TOWER_CENTER_X      = getWindowWidth() * 0.5f;
+    int TOWER_MAX_Y         = getWindowHeight();
+    int TOWER_BOX_WIDTH     = 100;
+    int TOWER_BOX_HEIGHT    = 10;
     
     for (int i = 0; i < 32; i++) {
-        int y = MAX_Y - (BOX_HEIGHT * 2 * i);
-        ConstVec *pos = new Vec2f(CENTER_X, y);
+        int y = TOWER_MAX_Y - (TOWER_BOX_HEIGHT * 2 * i);
         
-        Box *box = NULL;
+        Vec2f pos;
         if (i % 2 == 0) {
-            box = new Box(*pos, BOX_WIDTH, BOX_HEIGHT);
+            addBody(new Box(Vec2f(TOWER_CENTER_X, y), TOWER_BOX_WIDTH, TOWER_BOX_HEIGHT));
         } else {
-            box = new Box(*pos, BOX_WIDTH, BOX_HEIGHT);
+            static int THIRD_WIDTH = TOWER_BOX_WIDTH * 0.3f;
+            static int LEFT_X = TOWER_CENTER_X - THIRD_WIDTH;
+            static int MID_X = TOWER_CENTER_X;
+            static int RIGHT_X = TOWER_CENTER_X + THIRD_WIDTH;
+            
+            addBody(new Box(Vec2f(LEFT_X, y), THIRD_WIDTH, TOWER_BOX_HEIGHT));
+            addBody(new Box(Vec2f(MID_X, y), THIRD_WIDTH, TOWER_BOX_HEIGHT));
+            addBody(new Box(Vec2f(RIGHT_X, y), THIRD_WIDTH, TOWER_BOX_HEIGHT));
         }
-        addBody(box);
     }
 }
 
@@ -131,8 +136,6 @@ void CinderBoxFunApp::draw()
     // clear out the window with black
 	gl::clear( Color( 0, 0, 0 ) );
     
-    drawHelpText();
-    
 	for( vector<Body*>::const_iterator boxIt = mBodies.begin(); boxIt != mBodies.end(); ++boxIt ) {
         Body *body = *boxIt;
         Vec2f pos = body->getPosition();
@@ -160,17 +163,21 @@ void CinderBoxFunApp::draw()
 //            Physics::Polygon *polyBody = (Physics::Polygon *)body;
             
             gl::color(0.5f, 1, 0.25);
-            ConstVec pt1 = Vec2f(10,  0);
-            ConstVec pt2 = Vec2f(20, 20);
-            ConstVec pt3 = Vec2f( 0, 20);
+            ConstVec pt1 = Vec2f(TRIANGLE_EDGE_LENGTH * 0.5f,  0);
+            ConstVec pt2 = Vec2f(TRIANGLE_EDGE_LENGTH, TRIANGLE_EDGE_LENGTH);
+            ConstVec pt3 = Vec2f( 0, TRIANGLE_EDGE_LENGTH);
             gl::drawSolidTriangle(pt1, pt2, pt3);
         }
         
 		glPopMatrix();	
 	}
+    
+    drawHelpText();
 }
 
 void CinderBoxFunApp::drawHelpText() {
+    gl::enableAlphaBlending();
+    
     // Draw Help
     Vec2f textPosition = Vec2f(getWindowWidth() * 0.5f, 32.f);
     drawGameboyText("B - Box", textPosition);
@@ -178,12 +185,12 @@ void CinderBoxFunApp::drawHelpText() {
     drawGameboyText("C - Circle", textPosition);
     textPosition += Vec2f(0, 32.f);
     drawGameboyText("T - Triangle", textPosition);
+    
+    gl::disableAlphaBlending();
 }
 
 void CinderBoxFunApp::drawGameboyText(std::string text, Vec2f pos, float size) const {
-    gl::enableAlphaBlending();
     gl::drawStringCentered(text, pos, Color::white(), Font("Early-Gameboy", size));
-    gl::disableAlphaBlending();
 }
 
 CINDER_APP_NATIVE( CinderBoxFunApp, RendererGl )
