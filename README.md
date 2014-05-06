@@ -18,7 +18,7 @@ Creating dynamic shapes is a snoozefest!
 ======
 
 ```C++
-    // Add a box at (100,200) position that is 10x20
-    Box *box = new Box(Vec2f(100, 200), 10, 20);
-    mPhysicsWorld->addBody(box);
+// Add a box at (100,200) position that is 10x20
+Box *box = new Box(Vec2f(100, 200), 10, 20);
+mPhysicsWorld->addBody(box);
 ```
