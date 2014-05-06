@@ -12,6 +12,7 @@
 #include "cinder/Cinder.h"
 #include "cinder/CinderMath.h"
 #include "cinder/Vector.h"
+#include "cinder/PolyLine.h"
 #include "PhysicsBody.h"
 
 namespace Physics {
@@ -19,7 +20,7 @@ namespace Physics {
     class Polygon : public Physics::Body {
     public:
         Polygon();
-        Polygon(const ci::Vec2f &pos);
+        Polygon(ConstVec &pos, ci::PolyLine2f &points);
         ~Polygon();
         
         int         getWidth();

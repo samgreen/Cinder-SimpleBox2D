@@ -8,16 +8,20 @@
 
 #include "PhysicsPolygon.h"
 
+using namespace ci;
+
 namespace Physics {
 #pragma mark - Constructors
     Polygon::Polygon() {}
-    Polygon::Polygon(const ci::Vec2f &pos) : Body(pos) {
+    Polygon::Polygon(ConstVec &pos, PolyLine2f &points) : Body(pos) {
         // This defines a triangle in CCW order.
-        b2Vec2 vertices[3];
-        vertices[0].Set(0.0f, 0.0f);
-        vertices[1].Set(1.0f, 0.0f);
-        vertices[2].Set(0.0f, 1.0f);
-        int32 count = 3;
+        int32 count = points.size();
+        b2Vec2 *vertices = new b2Vec2[count];
+        size_t index = 0;
+        for (PolyLine2f::iterator it = points.begin(); it != points.end(); it++) {
+            vertices[index] = toBoxVec(*it);
+            index++;
+        }
         
         b2PolygonShape *shape = new b2PolygonShape;
         shape->Set(vertices, count);
@@ -29,14 +33,14 @@ namespace Physics {
     
 #pragma mark - Accessors
     int Polygon::getWidth() {
-        
+        return 0;
     }
     
     int Polygon::getHeight() {
-        
+        return 0;
     }
     
     b2AABB* Polygon::getAABB() {
-        
+        return NULL;
     }
 }
