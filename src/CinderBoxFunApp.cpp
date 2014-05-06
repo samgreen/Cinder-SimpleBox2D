@@ -23,6 +23,7 @@ class CinderBoxFunApp : public AppNative {
 	void            addBox(ConstVec &pos);
 	void            addCircle(ConstVec &pos);
     void            addTriangle(ConstVec &pos);
+    void            buildTower();
     
     World           *mPhysicsWorld;
     vector<Body*>   mBodies;
@@ -44,18 +45,20 @@ void CinderBoxFunApp::setup()
     // Add a solid ground at the bottom of the window
     mPhysicsWorld->addSolidGround(this);
     mPhysicsWorld->enableDebugDraw();
+    
+    buildTower();
 }
 
 void CinderBoxFunApp::addBox(ConstVec &pos)
 {
     Box *box = new Box(pos, 20, 10);
-    this->addBody(box);
+    addBody(box);
 }
 
 void CinderBoxFunApp::addCircle(ConstVec &pos)
 {
     Circle *circle = new Circle(pos, BOX_SIZE);
-    this->addBody(circle);
+    addBody(circle);
 }
 
 void CinderBoxFunApp::addTriangle(ConstVec &pos)
@@ -67,13 +70,34 @@ void CinderBoxFunApp::addTriangle(ConstVec &pos)
 
     
     Physics::Polygon *triangle = new Physics::Polygon(pos, points);
-    this->addBody(triangle);
+    addBody(triangle);
 }
 
 void CinderBoxFunApp::addBody(Body *body)
 {
     mPhysicsWorld->addBody(body);
     mBodies.push_back(body);
+}
+
+void CinderBoxFunApp::buildTower()
+{
+    int CENTER_X = getWindowWidth() * 0.5f;
+    int MAX_Y = getWindowHeight();
+    int BOX_WIDTH = 100;
+    int BOX_HEIGHT = 10;
+    
+    for (int i = 0; i < 32; i++) {
+        int y = MAX_Y - (BOX_HEIGHT * 2 * i);
+        ConstVec *pos = new Vec2f(CENTER_X, y);
+        
+        Box *box = NULL;
+        if (i % 2 == 0) {
+            box = new Box(*pos, BOX_WIDTH, BOX_HEIGHT);
+        } else {
+            box = new Box(*pos, BOX_WIDTH, BOX_HEIGHT);
+        }
+        addBody(box);
+    }
 }
 
 void CinderBoxFunApp::mouseDown(MouseEvent event)
@@ -86,6 +110,8 @@ void CinderBoxFunApp::mouseDown(MouseEvent event)
         addCircle(pos);
     } else {
         addBox(pos);
+        ConstVec *gravity = new ConstVec(5, 2.5);
+        mPhysicsWorld->setGravity(*gravity);
     }
 }
 
