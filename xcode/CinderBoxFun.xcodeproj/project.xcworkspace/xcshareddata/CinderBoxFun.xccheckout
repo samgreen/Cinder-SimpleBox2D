@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F941BBA1-D848-4C73-9546-A3786B9D18D6</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CinderBoxFun</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E9011230-AE4F-43EE-837F-7A0BEA2E2884</key>
+		<string>ssh://github.com/samgreen/Cinder-SimpleBox2D.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>xcode/CinderBoxFun.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E9011230-AE4F-43EE-837F-7A0BEA2E2884</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/samgreen/Cinder-SimpleBox2D.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E9011230-AE4F-43EE-837F-7A0BEA2E2884</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E9011230-AE4F-43EE-837F-7A0BEA2E2884</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CinderBoxFun</string>
+		</dict>
+	</array>
+</dict>
+</plist>
