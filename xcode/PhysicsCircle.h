@@ -23,7 +23,7 @@ namespace Physics {
         Circle(const ci::Vec2f &pos, int radius);
         ~Circle();
         
-        int getRadius();
+        int getRadius() const;
     };
     
 }

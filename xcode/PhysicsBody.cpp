@@ -34,12 +34,12 @@ namespace Physics {
     }
     
 #pragma mark - Body Type
-    BodyType Body::getBodyType() {
+    BodyType Body::getBodyType() const {
         return mBodyType;
     }
     
 #pragma mark - Position
-    Vec2f Body::getPosition() {
+    Vec2f Body::getPosition() const {
         if (mBody) {
             return toVec(mBody->GetPosition());
         }
@@ -56,7 +56,7 @@ namespace Physics {
     }
     
 #pragma mark - Velocity
-    Vec2f Body::getVelocity() {
+    Vec2f Body::getVelocity() const {
         if (mBody) {
             return toVec(mBody->GetLinearVelocity());
         }
@@ -71,7 +71,7 @@ namespace Physics {
     }
     
 #pragma mark - Rotation
-    float Body::getRotation() {
+    float Body::getRotation() const {
         if (mBody) {
             return mBody->GetAngle();
         }
@@ -87,7 +87,7 @@ namespace Physics {
         mBodyDef.angle = radians;
     }
     
-    float Body::getRotationDegrees() {
+    float Body::getRotationDegrees() const {
         return toDegrees(getRotation());
     }
     
@@ -100,7 +100,7 @@ namespace Physics {
         mBodyDef.angle = rotation;
     }
     
-    bool Body::isRotationLocked() {
+    bool Body::isRotationLocked() const {
         return mBodyDef.fixedRotation;
     }
     
@@ -112,7 +112,7 @@ namespace Physics {
     }
     
 #pragma mark - Other Physics
-    bool Body::isAffectedByGravity() {
+    bool Body::isAffectedByGravity() const {
         if (mBody) {
             return (mBody->GetGravityScale() > FLT_EPSILON);
         }
@@ -128,7 +128,7 @@ namespace Physics {
         mBodyDef.gravityScale = scale;
     }
     
-    bool Body::isDynamic() {
+    bool Body::isDynamic() const {
         if (mBody) {
             return (mBody->GetType() != b2_staticBody);
         }
@@ -145,7 +145,7 @@ namespace Physics {
         mBodyDef.type = type;
     }
     
-    bool Body::isActive() {
+    bool Body::isActive() const {
         if (mBody) {
             return mBody->IsActive();
         }
@@ -181,7 +181,7 @@ namespace Physics {
         mBodyDef.angularDamping = damping;
     }
     
-    float Body::getAngularDamping() {
+    float Body::getAngularDamping() const {
         if (mBody) {
             return mBody->GetAngularDamping();
         }

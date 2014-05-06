@@ -35,7 +35,7 @@ namespace Physics {
         void            removeBody(Body *body);
         void            addSolidGround(const ci::app::AppNative *app);
         
-        ci::Vec2f       getGravity();
+        ci::Vec2f       getGravity() const;
         void            setGravity(const ci::Vec2f &gravity);
         
         void            enableDebugDraw();

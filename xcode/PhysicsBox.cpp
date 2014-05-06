@@ -29,11 +29,11 @@ namespace Physics {
     Box::~Box() {}
     
 #pragma mark - Accessors
-    int Box::getWidth() {
+    int Box::getWidth() const {
         return mWidth;
     }
     
-    int Box::getHeight() {
+    int Box::getHeight() const {
         return mHeight;
     }
     

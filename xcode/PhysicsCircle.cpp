@@ -31,7 +31,7 @@ namespace Physics {
     }
     
 #pragma mark - Accessors
-    int Circle::getRadius() {
+    int Circle::getRadius() const {
         return mFixtureDef.shape->m_radius;
     }
 }

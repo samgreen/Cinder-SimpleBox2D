@@ -29,52 +29,52 @@ namespace Physics {
         Body(const ci::Vec2f &pos, bool isDynamic);
         ~Body();
 
-        BodyType        getBodyType();
+        BodyType        getBodyType() const;
         
-        ci::Vec2f       getPosition();
+        ci::Vec2f       getPosition() const;
         void            setPosition(const ci::Vec2f &pos);
         
-        float           getRotation();
+        float           getRotation() const;
         void            setRotation(float radians);
         
-        float           getRotationDegrees();
+        float           getRotationDegrees() const;
         void            setRotationDegrees(float degress);
         
         /// Can this body rotate on the Z axis?
-        bool            isRotationLocked();
+        bool            isRotationLocked() const;
         /// Set this body to allow rotation on the Z axis
         void            setRotationLocked(bool isLocked);
         
         /// Is this body affected by the world gravity?
-        bool            isAffectedByGravity();
+        bool            isAffectedByGravity() const;
         /// Set this body to be affected by the world's gravity
         void            setAffectedByGravity(bool isAffected);
         
         /// Is this body fixed in place or moving?
-        bool            isDynamic();
+        bool            isDynamic() const;
         /// Set this body as fixed or affected by physics
         void            setDynamic(bool isDynamic);
         
-        bool            isActive();
+        bool            isActive() const;
         void            setActive(bool isActive);
         
-        float           getDensity();
+        float           getDensity() const;
         void            setDensity(float density);
         
-        float           getRestitution();
+        float           getRestitution() const;
         void            setRestitution(float restitution);
         
-        float           getFriction();
+        float           getFriction() const;
         void            setFriction(float friction);
         
         /// Damping is used to reduce the world velocity of bodies. Damping is different than friction because friction only occurs with contact. Damping is not a replacement for friction and the two effects should be used together.
-        float           getAngularDamping();
+        float           getAngularDamping() const;
         void            setAngularDamping(float damping);
         
-        ci::Vec2f       getVelocity();
+        ci::Vec2f       getVelocity() const;
         void            setVelocity(ConstVec &velocity);
         
-        float           getAngularVelocity();
+        float           getAngularVelocity() const;
         void            setAngularVelocity(float angularVelocity);
         
         /// ((catA & maskB) != 0 && (catB & maskA) != 0)

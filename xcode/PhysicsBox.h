@@ -18,18 +18,14 @@ namespace Physics {
     class Box : public Physics::Body {
     public:
         Box();
-        
         Box(const ci::Vec2f &pos);
         Box(const ci::Vec2f &pos, int size);
         Box(const ci::Vec2f &pos, const ci::Vec2f &size);
         Box(const ci::Vec2f &pos, int width, int height);
         ~Box();
         
-        int getWidth();
-        int getHeight();
-        
-    protected:
-        void setupBox2D();
+        int getWidth() const;
+        int getHeight() const;
         
     private:
         int     mWidth;

@@ -75,7 +75,7 @@ namespace Physics {
         groundBody->CreateFixture(&groundBox, 0.0f);
     }
     
-    Vec2f World::getGravity() {
+    Vec2f World::getGravity() const {
         return toVec(mWorld->GetGravity());
     }
     
