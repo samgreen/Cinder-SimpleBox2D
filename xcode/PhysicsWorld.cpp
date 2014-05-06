@@ -55,6 +55,7 @@ namespace Physics {
     void World::removeBody(Body *body) {
         // Ask the world to destory this body
         mWorld->DestroyBody(body->mBody);
+        body->mBody = NULL;
     }
     
     void World::addSolidGround(const app::AppNative *app) {
