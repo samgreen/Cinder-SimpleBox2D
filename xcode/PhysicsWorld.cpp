@@ -69,21 +69,36 @@ namespace Physics {
         return mWorld->GetContactCount();
     }
     
-    void World::addSolidGround(const app::AppNative *app) {
+    void World::addSolidEdges(const app::AppNative *app) {
+        // Top
+        addSolidEdge(0, -10, app->getWindowWidth(), 10);
+        // Bottom
+        addSolidEdge(0, app->getWindowHeight() + 10, app->getWindowWidth(), 10);
+        // Left
+        addSolidEdge(-10, 0, 10, app->getWindowHeight());
+        // Right
+        addSolidEdge(app->getWindowWidth() + 10, 0, 10, app->getWindowHeight());
+    }
+    
+    void World::addSolidEdge(int x, int y, int width, int height) {
         // TODO: Refactor this to use chains, or edges
-        
         b2BodyDef groundBodyDef;
-        groundBodyDef.position.Set( 0.0f, app->getWindowHeight() );
+        groundBodyDef.type = b2_staticBody;
+        groundBodyDef.position.Set( x, y );
         b2Body* groundBody = mWorld->CreateBody(&groundBodyDef);
         
         // Define the ground box shape.
         b2PolygonShape groundBox;
         
         // The extents are the half-widths of the box.
-        groundBox.SetAsBox( app->getWindowWidth(), 10.0f );
+        groundBox.SetAsBox(width, height);
         
         // Add the ground fixture to the ground body.
         groundBody->CreateFixture(&groundBox, 0.0f);
+    }
+    
+    void World::addSolidGround(const app::AppNative *app) {
+        addSolidEdge(0, app->getWindowHeight() + 10, app->getWindowWidth(), 10);
     }
     
     Vec2f World::getGravity() const {

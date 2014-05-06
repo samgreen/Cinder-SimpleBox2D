@@ -40,6 +40,8 @@ namespace Physics {
         int             getNumContacts();
         
         void            addSolidGround(const ci::app::AppNative *app);
+        void            addSolidEdges(const ci::app::AppNative *app);
+        void            addSolidEdge(int x, int y, int width, int height);
         
         ci::Vec2f       getGravity() const;
         void            setGravity(ConstVec &gravity);
