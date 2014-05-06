@@ -77,6 +77,7 @@ namespace Physics {
         float           getAngularVelocity();
         void            setAngularVelocity(float angularVelocity);
         
+        /// ((catA & maskB) != 0 && (catB & maskA) != 0)
         void            setCollisionCategory(uint16 category);
         void            setCollisionMask(uint16 mask);
     protected:
