@@ -19,7 +19,7 @@ namespace Physics {
     Body::Body(const Vec2f &pos) : Body(pos, true) {}
     Body::Body(const Vec2f &pos, bool isDynamic) {
         // Body Def Defaults
-        mBodyDef.position = toBoxVector(pos);
+        mBodyDef.position = toBoxVec(pos);
         mBodyDef.type = (isDynamic ? b2_dynamicBody : b2_staticBody);
         
         // Fixture Def defaults
@@ -41,18 +41,33 @@ namespace Physics {
 #pragma mark - Position
     Vec2f Body::getPosition() {
         if (mBody) {
-            return toVec2f(mBody->GetPosition());
+            return toVec(mBody->GetPosition());
         }
         
-        return toVec2f(mBodyDef.position);
+        return toVec(mBodyDef.position);
     }
     
     void Body::setPosition(const ci::Vec2f &pos) {
         if (mBody) {
-            mBody->SetTransform(toBoxVector(pos), mBody->GetAngle());
+            mBody->SetTransform(toBoxVec(pos), mBody->GetAngle());
         }
         
-        mBodyDef.position = toBoxVector(pos);
+        mBodyDef.position = toBoxVec(pos);
+    }
+    
+#pragma mark - Velocity
+    Vec2f Body::getVelocity() {
+        if (mBody) {
+            return toVec(mBody->GetLinearVelocity());
+        }
+        return toVec(mBodyDef.linearVelocity);
+    }
+    
+    void Body::setVelocity(const ci::Vec2f &velocity) {
+        if (mBody) {
+            return mBody->SetLinearVelocity(toBoxVec(velocity));
+        }
+        mBodyDef.linearVelocity = toBoxVec(velocity);
     }
     
 #pragma mark - Rotation

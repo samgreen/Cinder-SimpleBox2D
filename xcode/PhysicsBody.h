@@ -66,6 +66,9 @@ namespace Physics {
         float           getAngularDamping();
         void            setAngularDamping(float damping);
         
+        ci::Vec2f       getVelocity();
+        void            setVelocity( const ci::Vec2f &velocity );
+        
     protected:
         BodyType        mBodyType;
         

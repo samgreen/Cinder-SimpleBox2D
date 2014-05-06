@@ -13,11 +13,12 @@
 #include "cinder/Vector.h"
 
 namespace Physics {
-    static inline b2Vec2 toBoxVector(const ci::Vec2f &v) {
+    
+    static inline b2Vec2 toBoxVec(const ci::Vec2f &v) {
         return b2Vec2(v.x, v.y);
     }
     
-    static inline ci::Vec2f toVec2f(const b2Vec2 &v) {
+    static inline ci::Vec2f toVec(const b2Vec2 &v) {
         return ci::Vec2f(v.x, v.y);
     }
 }
