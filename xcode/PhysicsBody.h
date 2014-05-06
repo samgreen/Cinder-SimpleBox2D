@@ -80,6 +80,8 @@ namespace Physics {
         /// ((catA & maskB) != 0 && (catB & maskA) != 0)
         void            setCollisionCategory(uint16 category);
         void            setCollisionMask(uint16 mask);
+        
+        void            setSensor(bool isSensor);
     protected:
         BodyType        mBodyType;
         

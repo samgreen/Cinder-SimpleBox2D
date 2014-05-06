@@ -196,5 +196,9 @@ namespace Physics {
     void Body::setCollisionMask(uint16 mask) {
         mFixtureDef.filter.maskBits = mask;
     }
+    
+    void Body::setSensor(bool isSensor) {
+        mFixtureDef.isSensor = isSensor;
+    }
 }
 
