@@ -24,10 +24,6 @@ namespace Physics {
         ~Circle();
         
         int getRadius();
-        
-    private:
-        int             mRadius;
-        b2CircleShape   mShape;
     };
     
 }

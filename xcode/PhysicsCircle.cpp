@@ -18,7 +18,6 @@ namespace Physics {
     Circle::Circle(const Vec2f &pos) : Circle(pos, 10) {}
     Circle::Circle(const Vec2f &pos, int radius) : Body(pos) {
         mBodyType = BodyTypeCircle;
-        mRadius = radius;
         
         // Create circle shape
         b2CircleShape circle;
@@ -33,6 +32,6 @@ namespace Physics {
     
 #pragma mark - Accessors
     int Circle::getRadius() {
-        return mRadius;
+        return mFixtureDef.shape->m_radius;
     }
 }

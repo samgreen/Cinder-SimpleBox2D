@@ -25,10 +25,14 @@ namespace Physics {
     }
     
     void World::update() {
-        float32 timestep = 1.f / 60.f;
-        int32 velocityIterations = 6;
-        int32 positionIterations = 2;
+        static const float32 TIME_STEP = 1.f / 60.f;
+        static const int32 VEL_ITERATIONS = 6;
+        static const int32 POS_ITERATIONS = 2;
         
+        this->update(TIME_STEP, VEL_ITERATIONS, POS_ITERATIONS);
+    }
+    
+    void World::update(float32 timestep, int32 velocityIterations, int32 positionIterations) {
         for (int32 i = 0; i < 60; ++i) {
             mWorld->Step(timestep, velocityIterations, positionIterations);
         }
@@ -38,7 +42,7 @@ namespace Physics {
         mWorld->DrawDebugData();
     }
     
-    void World::addBody(Physics::Body *body) {
+    void World::addBody(Body *body) {
         // Create the body in the world
         const b2BodyDef *bodyDef = &body->mBodyDef;
         body->mBody = mWorld->CreateBody(bodyDef);
@@ -46,6 +50,11 @@ namespace Physics {
         // Attach the fixture to this body
         const b2FixtureDef *fixtureDef = &body->mFixtureDef;
         body->mBody->CreateFixture(fixtureDef);
+    }
+    
+    void World::removeBody(Body *body) {
+        // Ask the world to destory this body
+        mWorld->DestroyBody(body->mBody);
     }
     
     void World::addSolidGround(const app::AppNative *app) {
