@@ -125,7 +125,84 @@ namespace Physics {
         mBody->ApplyAngularImpulse(impulse);
     }
     
-#pragma mark - Other Physics
+#pragma mark - Physical Properties
+    void Body::setDensity(float density) {
+        mFixtureDef.density = density;
+    }
+    
+    void Body::setFriction(float friction) {
+        mFixtureDef.friction = friction;
+    }
+    
+    float Body::getMass() const {
+        if (mBody) {
+            return mBody->GetMass();
+        }
+        
+        return 0;
+    }
+    
+    void Body::setMass(float mass) {
+        if (mBody) {
+            b2MassData *massData;
+            mBody->GetMassData(massData);
+            massData->mass = mass;
+            
+            const b2MassData *newData = massData;
+            return mBody->SetMassData(newData);
+        }
+    }
+    
+    void Body::setRestitution(float restitution) {
+        mFixtureDef.restitution = restitution;
+    }
+    
+    void Body::setAngularDamping(float damping) {
+        if (mBody) {
+            return mBody->SetAngularDamping(damping);
+        }
+        
+        mBodyDef.angularDamping = damping;
+    }
+    
+    float Body::getAngularDamping() const {
+        if (mBody) {
+            return mBody->GetAngularDamping();
+        }
+        
+        return mBodyDef.angularDamping;
+    }
+    
+#pragma mark - Collision
+    bool Body::usesPreciseCollision() {
+        if (mBody) {
+            return mBody->IsBullet();
+        }
+        
+        return mBodyDef.bullet;
+    }
+    
+    void Body::setPreciseCollision(bool isPrecise) {
+        if (mBody) {
+            return mBody->SetBullet(isPrecise);
+        }
+        
+        return mBody->SetBullet(isPrecise);
+    }
+    
+    void Body::setCollisionCategory(uint16 category) {
+        mFixtureDef.filter.categoryBits = category;
+    }
+    
+    void Body::setCollisionMask(uint16 mask) {
+        mFixtureDef.filter.maskBits = mask;
+    }
+    
+#pragma mark - Other Helpers
+    void Body::setSensor(bool isSensor) {
+        mFixtureDef.isSensor = isSensor;
+    }
+    
     bool Body::isAffectedByGravity() const {
         if (mBody) {
             return (mBody->GetGravityScale() > FLT_EPSILON);
@@ -174,80 +251,6 @@ namespace Physics {
         
         mBodyDef.active = isActive;
     }
-    
-    void Body::setDensity(float density) {
-        mFixtureDef.density = density;
-    }
-    
-    void Body::setFriction(float friction) {
-        mFixtureDef.friction = friction;
-    }
-    
-    float Body::getMass() const {
-        if (mBody) {
-            return mBody->GetMass();
-        }
-        
-        return 0;
-    }
-    
-    void Body::setMass(float mass) {
-        if (mBody) {
-            b2MassData *massData;
-            mBody->GetMassData(massData);
-            massData->mass = mass;
-            
-            const b2MassData *newData = massData;
-            return mBody->SetMassData(newData);
-        }
-    }
-    
-    void Body::setRestitution(float restitution) {
-        mFixtureDef.restitution = restitution;
-    }
-    
-    void Body::setAngularDamping(float damping) {
-        if (mBody) {
-            return mBody->SetAngularDamping(damping);
-        }
-        
-        mBodyDef.angularDamping = damping;
-    }
-    
-    float Body::getAngularDamping() const {
-        if (mBody) {
-            return mBody->GetAngularDamping();
-        }
-        
-        return mBodyDef.angularDamping;
-    }
-    
-    bool Body::usesPreciseCollision() {
-        if (mBody) {
-            return mBody->IsBullet();
-        }
-        
-        return mBodyDef.bullet;
-    }
-    
-    void Body::setPreciseCollision(bool isPrecise) {
-        if (mBody) {
-            return mBody->SetBullet(isPrecise);
-        }
-        
-        return mBody->SetBullet(isPrecise);
-    }
-    
-    void Body::setCollisionCategory(uint16 category) {
-        mFixtureDef.filter.categoryBits = category;
-    }
-    
-    void Body::setCollisionMask(uint16 mask) {
-        mFixtureDef.filter.maskBits = mask;
-    }
-    
-    void Body::setSensor(bool isSensor) {
-        mFixtureDef.isSensor = isSensor;
-    }
+
 }
 

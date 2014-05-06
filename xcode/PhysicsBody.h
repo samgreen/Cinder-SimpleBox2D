@@ -31,9 +31,11 @@ namespace Physics {
 
         BodyType        getBodyType() const;
         
+#pragma mark - Position
         ci::Vec2f       getPosition() const;
         void            setPosition(ConstVec &pos);
         
+#pragma mark - Rotation
         float           getRotation() const;
         void            setRotation(float radians);
         
@@ -50,17 +52,29 @@ namespace Physics {
         /// Set this body to be affected by the world's gravity
         void            setAffectedByGravity(bool isAffected);
         
+#pragma mark Angular Physics
+        float           getAngularVelocity() const;
+        void            setAngularVelocity(float angularVelocity);
+        
+        /// Damping is used to reduce the world velocity of bodies. Damping is different than friction because friction only occurs with contact. Damping is not a replacement for friction and the two effects should be used together.
+        float           getAngularDamping() const;
+        void            setAngularDamping(float damping);
+        
+#pragma mark - Forces
+        void            applyForce(ConstVec &force, ConstVec &point);
+        void            applyTorque(float torque);
+        void            applyLinearImpulse(ConstVec &impulse, ConstVec &point);
+        void            applyAngularImpulse(float impulse);
+        
+#pragma mark - Collision
+        /// ((catA & maskB) != 0 && (catB & maskA) != 0)
+        void            setCollisionCategory(uint16 category);
+        void            setCollisionMask(uint16 mask);
+        
         bool            usesPreciseCollision();
         void            setPreciseCollision(bool isPrecise);
         
-        /// Is this body fixed in place or moving?
-        bool            isDynamic() const;
-        /// Set this body as fixed or affected by physics
-        void            setDynamic(bool isDynamic);
-        
-        bool            isActive() const;
-        void            setActive(bool isActive);
-        
+#pragma mark - Physical Properties
         float           getDensity() const;
         void            setDensity(float density);
         
@@ -73,24 +87,17 @@ namespace Physics {
         float           getMass() const;
         void            setMass(float mass);
         
-        /// Damping is used to reduce the world velocity of bodies. Damping is different than friction because friction only occurs with contact. Damping is not a replacement for friction and the two effects should be used together.
-        float           getAngularDamping() const;
-        void            setAngularDamping(float damping);
-        
         ci::Vec2f       getVelocity() const;
         void            setVelocity(ConstVec &velocity);
         
-        float           getAngularVelocity() const;
-        void            setAngularVelocity(float angularVelocity);
+#pragma mark - Other Helpers
+        /// Is this body fixed in place or moving?
+        bool            isDynamic() const;
+        /// Set this body as fixed or affected by physics
+        void            setDynamic(bool isDynamic);
         
-        void            applyForce(ConstVec &force, ConstVec &point);
-        void            applyTorque(float torque);
-        void            applyLinearImpulse(ConstVec &impulse, ConstVec &point);
-        void            applyAngularImpulse(float impulse);
-        
-        /// ((catA & maskB) != 0 && (catB & maskA) != 0)
-        void            setCollisionCategory(uint16 category);
-        void            setCollisionMask(uint16 mask);
+        bool            isActive() const;
+        void            setActive(bool isActive);
         
         void            setSensor(bool isSensor);
     protected:
