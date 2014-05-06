@@ -183,6 +183,25 @@ namespace Physics {
         mFixtureDef.friction = friction;
     }
     
+    float Body::getMass() const {
+        if (mBody) {
+            return mBody->GetMass();
+        }
+        
+        return 0;
+    }
+    
+    void Body::setMass(float mass) {
+        if (mBody) {
+            b2MassData *massData;
+            mBody->GetMassData(massData);
+            massData->mass = mass;
+            
+            const b2MassData *newData = massData;
+            return mBody->SetMassData(newData);
+        }
+    }
+    
     void Body::setRestitution(float restitution) {
         mFixtureDef.restitution = restitution;
     }

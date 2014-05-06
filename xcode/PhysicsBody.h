@@ -67,6 +67,9 @@ namespace Physics {
         float           getFriction() const;
         void            setFriction(float friction);
         
+        float           getMass() const;
+        void            setMass(float mass);
+        
         /// Damping is used to reduce the world velocity of bodies. Damping is different than friction because friction only occurs with contact. Damping is not a replacement for friction and the two effects should be used together.
         float           getAngularDamping() const;
         void            setAngularDamping(float damping);
